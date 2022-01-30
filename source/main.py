@@ -27,7 +27,7 @@ windowSize = '225x550'
 fontSize = 12
 fontFamily = 'Arial'
 
-
+lastPickedRole = ''
 roles = {
     'Server':0,
     'Client':1
@@ -46,17 +46,32 @@ actionButtonText = StringVar()
 messageRequest = messageHandler()
 hostnameLabelText = StringVar()
 hostnameText = StringVar()
+savedServerHostname = ''
+savedClientHostname = ''
 portText = StringVar()
 consoleText = Text()
+lastPickedRole = 'Server'
 
 def onRoleChange():
+    global lastPickedRole
+    global savedClientHostname
+    global savedServerHostname
+
+    if lastPickedRole == 'Server':
+        savedServerHostname = hostnameText.get()
+    elif lastPickedRole == 'Client':
+        savedClientHostname = hostnameText.get()
     if roleRequest.get() == roles['Server']:
-        hostnameText.set(socket.gethostname())
+        hostnameText.set(savedServerHostname)
         actionButtonText.set('Receive Message')
         hostnameLabelText.set('Starting Server On:')
+        lastPickedRole = 'Server'
     elif roleRequest.get() == roles['Client']:
+        hostnameText.set(savedClientHostname)
         actionButtonText.set('Send Message')
         hostnameLabelText.set('Sending To:')
+        lastPickedRole = 'Client'
+
     
 def updateConsole(message):
     consoleText.config(state=NORMAL)
@@ -95,10 +110,11 @@ def onAction():
 
         elif roleRequest.get() == roles['Client']:
             sendMessage = str(random.getrandbits(64))
+            updateConsole("Sending message...")
             if protocolRequest.get() == protocols['UDP']:
-                messageRequest.sendUDP(hostnameText.get(), sendMessage, int(portText.get()))
+                messageRequest.sendUDP(hostnameText.get(), sendMessage, int(portText.get()), 5)
             elif protocolRequest.get() == protocols['TCP']:
-                messageRequest.sendTCP(hostnameText.get(), sendMessage, int(portText.get()))
+                messageRequest.sendTCP(hostnameText.get(), sendMessage, int(portText.get()), 5)
             updateConsole("Sent to: " + hostnameText.get() + "\nMessage: " + sendMessage)
     except Exception as e:
         updateConsole("Error: " + str(e))

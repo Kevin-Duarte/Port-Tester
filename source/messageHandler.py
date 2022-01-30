@@ -8,8 +8,9 @@ class messageHandler:
     def __init__(self) -> None:
         pass
 
-    def sendTCP(self, host, message, port):
+    def sendTCP(self, host, message, port, timeout):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            s.settimeout(timeout)
             s.connect((host, port))
             s.sendall(message.encode())
 
@@ -23,8 +24,9 @@ class messageHandler:
                 data = conn.recv(1024)
                 return data, addr
 
-    def sendUDP(self, host, message, port):
+    def sendUDP(self, host, message, port, timeout):
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            s.settimeout(timeout)
             s.sendto(message.encode(), (host, port))
 
     def receiveUDP(self, host, port, timeout):
