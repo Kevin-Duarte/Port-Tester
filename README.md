@@ -8,7 +8,7 @@
 
 ### Getting the executable
 - Option 1 - Direct Download: Direct download of the executable is found on www.incodewespeak.com
-- Option 2 - Building From Source: Download the repo, extract it, and run `build.bat` under Port-Tester > Source. The exe file will be generated under Port-Tester > install-files
+- Option 2 - Building From Source: Download the repo, extract it, and run `build.bat` under Port-Tester > Source. The exe file will be generated under Port-Tester > install-files (Note, if building manually, you require Python3+, Pip, and PyInstaller)
 
 ### Example Use Case - Port Testing Behind a Firewall
 1. Port Tester is running on two workstations
