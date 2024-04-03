@@ -7,7 +7,7 @@
 - In Code We Speak is not responsible for maintenance of this software. However, feel free to reach us at support@incodewespeak.com for special requests or custom solutions.
 
 ### Getting the executable
-- Option 1 - Direct Download: Direct download of the executable is found on www.incodewespeak.com
+- Option 1 - Direct Download: Direct download of the executable is found on https://github.com/Kevin-Duarte/Port-Tester/releases/tag/Stable
 - Option 2 - Building From Source: Download the repo, extract it, and run `build.bat` under Port-Tester > Source. The exe file will be generated under Port-Tester > install-files (Note, if building manually, you require Python3+, Pip, and PyInstaller)
 
 ### Example Use Case - Port Testing Behind a Firewall
